@@ -125,6 +125,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
         if (requestCode == 0x123 && grantResults.length == 1
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             mAutoTextureView =new AutoTextureView(BaseActivity.this, null);
@@ -159,6 +160,7 @@ public class BaseActivity extends AppCompatActivity {
                         @Override
                         public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
                             super.onCaptureCompleted(session, request, result);
+
                             try {
                                 mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER,
                                         CameraMetadata.CONTROL_AF_TRIGGER_CANCEL);
@@ -207,6 +209,7 @@ public class BaseActivity extends AppCompatActivity {
         setUpCameraOutPuts(width, height);
         configureTransform(width, height);
         CameraManager cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+
         try {
             if (checkSelfPermission(Manifest.permission.CAMERA)
             != PackageManager.PERMISSION_GRANTED) {
@@ -240,6 +243,7 @@ public class BaseActivity extends AppCompatActivity {
                             mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE,
                                     CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
                             mPreviewRequest = mPreviewRequestBuilder.build();
+
                             try {
                                 mCameraCaptureSession.setRepeatingRequest(
                                         mPreviewRequest, null, null);
@@ -277,6 +281,7 @@ public class BaseActivity extends AppCompatActivity {
                 byte[] bytes = new byte[buffer.remaining()];
                 File file = new File(getExternalFilesDir(null), "zjt.jpg");
                 buffer.get(bytes);
+
                 try (FileOutputStream outputStream = new FileOutputStream(file)) {
                     outputStream.write(bytes);
                     Toast.makeText(BaseActivity.this,"保存："
@@ -293,13 +298,14 @@ public class BaseActivity extends AppCompatActivity {
             mPreviewSize = chooseOptimalSize(streamConfigurationMap.getOutputSizes(SurfaceTexture.class),
                     width, height, largest);
             int orientation = getResources().getConfiguration().orientation;
+
             if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 mAutoTextureView.setAspectRation(mPreviewSize.getWidth(), mPreviewSize.getHeight());
             }else {
                 mAutoTextureView.setAspectRation(mPreviewSize.getHeight(),
                         mPreviewSize.getWidth());
             }
-        } catch (CameraAccessException e) {
+        }catch (CameraAccessException e) {
             e.printStackTrace();
         }catch (NullPointerException e) {
             System.out.println("空指针异常。" + NullPointerException.class);
@@ -310,6 +316,7 @@ public class BaseActivity extends AppCompatActivity {
         List<Size> bigEnough = new ArrayList<>();
         int w = aspectRation.getWidth();
         int h = aspectRation.getHeight();
+
         for (Size option : choices) {
             if (option.getHeight() == option.getWidth() * h / w
                 && option.getWidth() >= width
@@ -317,6 +324,7 @@ public class BaseActivity extends AppCompatActivity {
                 bigEnough.add(option);
             }
         }
+        
         if (bigEnough.size() > 0) {
             return Collections.min(bigEnough, new CompareSizesByArea());
         }else {
