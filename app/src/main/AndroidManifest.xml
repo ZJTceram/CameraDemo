@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CameraV2API">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
             android:name=".BaseActivity"
             android:exported="true">

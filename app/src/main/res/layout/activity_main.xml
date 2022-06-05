@@ -5,28 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     android:layout_height="match_parent"
-    android:layout_weight="3"
-    tools:context=".BaseActivity"
-    tools:ignore="ExtraText">
+    tools:context=".BaseActivity">
+
 
     <FrameLayout
         android:id="@+id/FrameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_weight="2"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/Capture"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:transitionName="@string/capture" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/Capture"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:visibility="visible"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="bottom|center"
+        android:background="@drawable/button_circle"
+        android:transitionName="@string/capture"/>
 </LinearLayout>
 
 
