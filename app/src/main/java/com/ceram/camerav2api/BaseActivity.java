@@ -65,7 +65,7 @@ public class BaseActivity extends AppCompatActivity {
     private CameraCaptureSession mCameraCaptureSession;
     private ImageReader mImageReader;
 
-    private String mbCameraID = "0";
+    private final String mbCameraID = "0";
 
     private final TextureView.SurfaceTextureListener mSurfaceTextureListener
             = new TextureView.SurfaceTextureListener() {
@@ -266,6 +266,7 @@ public class BaseActivity extends AppCompatActivity {
     private void setUpCameraOutPuts(int width, int height) {
         CameraManager cameraManager = (CameraManager) getSystemService(
                 Context.CAMERA_SERVICE);
+
         try {
             CameraCharacteristics characteristics  = cameraManager.getCameraCharacteristics(mbCameraID);
             StreamConfigurationMap streamConfigurationMap = characteristics.get(
